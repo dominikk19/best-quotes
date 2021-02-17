@@ -1,9 +1,5 @@
 <!-- Nagłówek -->
-<nav>
-  <div class="nav-wrapper teal darken-3">
-    <span class="brand-logo center">Najlepsze cytaty</span>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 <!-- koniec nagłówka -->
 
 <div class="container q-container">
@@ -40,11 +36,11 @@
             </div>
             <div class="card-action right-align">
               <span class="badge grey darken-2 left white-text">{{quotation.votes}}</span>
-              <button class="btn blue mr-5">
+              <button class="btn blue mr-5" (click)="addVoute(quotation, +1)">
                 <i class="material-icons">exposure_plus_1</i>
               </button>
               <button class="btn brown">
-                <i class="material-icons">exposure_neg_1</i>
+                <i class="material-icons" (click)="addVoute(quotation, -1)">exposure_neg_1</i>
               </button>
             </div>
           </div>
@@ -58,21 +54,29 @@
       <div class="col s12">
         <h5>Najlepsze</h5>
         <div class="collection">
-          <p class="collection-item">
-            <span class="blue lighten-4 badge">7</span>
-            Jeśli nie chcesz mojej zguby, krrrokodyla daj mi luby.<br/>
-            <span class="blue-text">Aleksander Fredro</span>
-          </p>
+          <ng-container *ngFor="let quotation of quotes">
+            <p class="collection-item" *ngIf="quotation.votes > 0">
+              <span class="blue lighten-4 badge">{{quotation.votes}}</span>
+              {{quotation.sentence}}
+              <br/>
+              <span class="blue-text">
+                {{quotation.author}}</span>
+            </p>
+          </ng-container>
         </div>
       </div>
       <div class="col s12">
         <h5>Najgorsze</h5>
         <div class="collection">
-          <p class="collection-item">
-            <span class="blue lighten-4 badge">-2</span>
-            Bądź dobrej myśli, bo po co być złej.<br/>
-            <span class="blue-text">Stanisław Lem</span>
-          </p>
+          <ng-container *ngFor="let quotation of quotes">
+            <p class="collection-item" *ngIf="quotation.votes < 0">
+              <span class="blue lighten-4 badge">{{quotation.votes}}</span>
+              {{quotation.sentence}}
+              <br/>
+              <span class="blue-text">
+                {{quotation.author}}</span>
+            </p>
+          </ng-container>
         </div>
       </div>
     </div>
