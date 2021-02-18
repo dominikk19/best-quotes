@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'Najlepsze cytaty';
   quotes: Quotation[] = QUOTES;
 
-  addVoute(quotation: Quotation, value: number) {
+  addVote(quotation: Quotation, value: number) {
     quotation.votes += value;
   }
 
